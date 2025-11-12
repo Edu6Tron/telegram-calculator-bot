@@ -1,6 +1,9 @@
 from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, ContextTypes, filters
 import ast
+import os
+
+TOKEN = os.environ.get("YOUR_BOT_TOKEN")
 
 # Safe evaluation function using ast
 def safe_eval(expr):
@@ -60,7 +63,7 @@ async def echo_math(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("Send a math expression (e.g. 3*7-2/4) or use /calc for help.")
 
 def main():
-    app = Application.builder().token("8485066419:AAF0bNuJ12HcA0kzvocBbCVJ4N9D2lygrTM").build()
+    app = Application.builder().token(TOKEN).build()
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(CommandHandler("calc", calc))
@@ -69,3 +72,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
